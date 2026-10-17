@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+/* Class-based dark mode (Tailwind v4): <html class="dark"> enables `dark:` utilities. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-royal: #0056A6;
+  --color-royal-dark: #003D7A;
+  --color-royal-light: #2B76C4;
+  --color-ink: #1F2937;
+  --color-amber: #F59E0B;
+  --color-amber-dark: #C97C05;
+  --color-ice: #EAF4FB;
+  --color-steel: #5B6B7F;
+  --color-frost: #F7FAFC;
+
+  /* Themable tokens: overridden under :root.dark below. */
+  --color-fg: #1F2937;
+  --color-surface: #FFFFFF;
+  --color-card: #FFFFFF;
+  --color-link: #0056A6;
+}
+
+/*
+ * Dark theme. `ink` is intentionally NOT overridden: it stays the dark surface colour
+ * (hero, footer, page headers) and the text colour on amber buttons in both themes.
+ * `royal` is the brand fill (buttons, chips); `link` is the same blue used as text.
+ */
+:root.dark {
+  color-scheme: dark;
+  --color-fg: #E6EBF2;
+  --color-surface: #0B1220;
+  --color-card: #111B2E;
+  --color-frost: #0F1729;
+  --color-ice: #16253D;
+  --color-steel: #9AA8BC;
+  --color-royal: #2270C8;
+  --color-link: #5B9FE6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-fg);
+  background: var(--color-surface);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
+.font-mono-spec {
+  font-family: var(--font-mono);
+}
+
+/* Mullion grid — signature motif: thin cross lines evoking window framing */
+.mullion-divider {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(31,41,55,0.15) 15%, rgba(31,41,55,0.15) 85%, transparent);
+}
+.mullion-divider::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -7px;
+  width: 1px;
+  height: 15px;
+  background: rgba(31,41,55,0.25);
+}
+
+.pane-grid-bg {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.pane-grid-bg-dark {
+  background-image:
+    linear-gradient(rgba(31,41,55,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31,41,55,0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 2px;
+}
+
+.swiper-pagination-bullet {
+  background: var(--color-fg);
+}
